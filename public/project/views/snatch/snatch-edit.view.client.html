@@ -1,0 +1,77 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid row">
+        <div class="col-xs-1 col-sm-1">
+            <div class="navbar-header">
+                <p class="navbar-text">
+                    <a href="#/user/{{model.userId}}/theme/{{model.themeId}}/snatch"
+                       class="navbar-link">
+                        <span class="glyphicon glyphicon-chevron-left"></span></a>
+                </p>
+            </div>
+        </div>
+
+        <div class="col-xs-10">
+            <div class="navbar-header">
+                <a id="head" class="navbar-brand">
+                    Your Snatch {{model.snatch.type}}
+                </a>
+            </div>
+        </div>
+
+        <div class="col-sm-1 col-xs-1">
+            <div class="navbar-header">
+                <p id="ok" class="navbar-text">
+                    <a ng-click="model.updateSnatch(model.snatch)" class="navbar-link">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div ng-if="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
+    <form action="/api/upload" method="post" enctype="multipart/form-data" name="myForm" novalidate>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea ng-model="model.snatch.description" rows="2" name="description" type="text" class="form-control"
+                      id="description" placeholder="description"
+                      required>
+            </textarea>
+            <span class="help-block"
+                  ng-show="(myForm.description.$invalid && !myForm.description.$pristine)">
+                  Please input image description.
+            </span>
+        </div>
+        <div class="form-group">
+            <label for="upload">Upload</label>
+            <input name="myFile" type="file" class="form-control"/>
+            <input name="snatchId" value="{{model.snatch._id}}" style="display: none"/>
+            <input name="userId" value="{{model.userId}}" style="display: none"/>
+            <input name="themeId" value="{{model.themeId}}" style="display: none"/>
+            <input name="snatchId" value="{{model.snatchId}}" style="display: none"/>
+
+            <button id="upload" type="submit" class="btn btn-block btn-primary">Upload Image</button>
+        </div>
+        <div class="form-group">
+            <a href="#/user/{{model.userId}}/theme/{{model.themeId}}/snatch/{{model.snatchId}}/search"
+               id="search" type="button" class="btn btn-block btn-success">Search</a>
+        </div>
+    </form>
+    <a ng-click="model.deleteSnatch(model.snatchId)" class="btn btn-danger  btn-block">Delete</a>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div id="user" class="container-fluid">
+        <div class="row navbar-text">
+            <div class="col-xs-3 text-center">
+                <a href="#/user/{{model.userId}}" class="navbar-link">
+                    <span class="glyphicon glyphicon-user"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>

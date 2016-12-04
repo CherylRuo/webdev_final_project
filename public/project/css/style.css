@@ -1,0 +1,37 @@
+input.form-control {
+    margin-bottom: 5px;
+}
+
+body {
+    font-family: Verdana;
+    padding: 60px;
+    overflow: scroll;
+}
+
+/*.app {*/
+    /*background-color: lavender;*/
+/*}*/
+
+.links {
+    color: darkblue;
+    text-decoration: none;
+}
+
+#loginCollage {
+    padding-top: 35px;
+    max-width: 100%;
+    height: auto;
+}
+
+.nounderline {
+    text-decoration: none !important
+}
+
+ul {
+    font-size: large;
+}
+
+li {
+    margin: 20px;
+    list-style-type: none;
+}

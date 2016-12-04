@@ -1,0 +1,58 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid row">
+        <div class="col-xs-1 col-sm-1">
+            <div class="navbar-header">
+                <p class="navbar-text">
+                    <a href="#/user/{{model.userId}}/theme/{{model.themeId}}" class="navbar-link">
+                        <span class="glyphicon glyphicon-chevron-left"></span></a>
+                </p>
+            </div>
+        </div>
+
+        <div class="col-xs-10">
+            <div class="navbar-header">
+                <a id="head" class="navbar-brand">
+                    Snatches
+                </a>
+            </div>
+        </div>
+
+        <div class="col-sm-1 col-xs-1">
+            <div class="navbar-header">
+                <p id="plus" class="navbar-text">
+                    <a ng-click="model.createSnatch(model.snatch)" class="navbar-link">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <ul>
+        <li ng-repeat="snatch in model.snatches">
+            <div class="container-fluid row">
+                <div>
+                        <img ng-src="{{snatch.url}}">
+                </div>
+                <div class="col-xs-2">
+                    <a href="#/user/{{model.userId}}/theme/{{model.themeId}}/snatch/{{snatch._id}}" class="nounderline">
+                        <span class="glyphicon glyphicon-cog"></span></a>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div id="user" class="container-fluid">
+        <div class="row navbar-text">
+            <div class="col-xs-3 text-center">
+                <a href="#/user/{{model.userId}}" class="navbar-link">
+                    <span class="glyphicon glyphicon-user"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>

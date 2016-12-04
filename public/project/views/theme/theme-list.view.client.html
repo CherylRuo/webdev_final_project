@@ -1,0 +1,59 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid row">
+        <div class="col-xs-1 col-sm-1">
+            <div class="navbar-header">
+                <p class="navbar-text">
+                    <a href="#/user/{{model.userId}}" class="navbar-link">
+                        <span class="glyphicon glyphicon-chevron-left"></span></a>
+                </p>
+            </div>
+        </div>
+
+        <div class="col-xs-10">
+            <div class="navbar-header">
+                <a id="head" class="navbar-brand" href="#">
+                    Themes
+                </a>
+            </div>
+        </div>
+
+        <div class="col-sm-1 col-xs-1">
+            <div class="navbar-header">
+                <p id="plus" class="navbar-text">
+                    <a href="#/user/{{model.userId}}/theme/new" class="navbar-link">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <ul>
+        <li ng-repeat="theme in model.themes">
+            <div class="container-fluid row">
+                <div class="col-xs-10">
+                    <a href="#/user/{{model.userId}}/theme/{{theme._id}}/snatch"
+                       class="nounderline">{{theme.name}}</a>
+                </div>
+                <div class="col-xs-2">
+                    <a href="#/user/{{model.userId}}/theme/{{theme._id}}" class="nounderline">
+                        <span class="glyphicon glyphicon-cog"></span></a>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div id="user" class="container-fluid">
+        <div class="row navbar-text">
+            <div class="col-xs-3 text-center">
+                <a href="#/user/{{model.userId}}" class="navbar-link">
+                    <span class="glyphicon glyphicon-user"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>

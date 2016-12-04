@@ -1,0 +1,65 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid row">
+        <div class="col-xs-1 col-sm-1">
+            <div class="navbar-header">
+                <p class="navbar-text">
+                    <a href="#/user/{{model.userId}}/theme" class="navbar-link">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        <div class="col-xs-10">
+            <div class="navbar-header">
+                <a id="head1" class="navbar-brand">
+                    Themes
+                </a>
+            </div>
+        </div>
+
+        <div class="col-sm-1 col-xs-1">
+            <div class="navbar-header">
+                <p id="ok" class="navbar-text">
+                    <a ng-click="model.updateTheme(model.theme)" class="navbar-link">
+                        <span class="glyphicon glyphicon-ok"></span></a>
+                </p>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div ng-if="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
+    <form name="myForm" novalidate>
+        <div class="form-group">
+            <label for="themename">Theme Name</label>
+            <input ng-model="model.Theme.name" name="name" class="form-control" id="Themename" type="text"
+                   placeholder="theme name" required/>
+            <span class="help-block"
+                  ng-show="(myForm.name.$invalid && !myForm.name.$pristine)">
+                  Please input theme name.
+            </span>
+        </div>
+        <div class="form-group">
+            <label for="webdescription">Theme Description</label>
+            <textarea ng-model="model.theme.description" rows="5" class="form-control" id="webdescription"
+                      placeholder="theme description"></textarea>
+        </div>
+    </form>
+    <a ng-click="model.deleteTheme(model.themeId)" class="btn btn-danger  btn-block">Delete</a>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div id="user" class="container-fluid">
+        <div class="row navbar-text">
+            <div class="col-xs-3 text-center">
+                <a href="#/user/{{model.userId}}" class="navbar-link">
+                    <span class="glyphicon glyphicon-user"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,29 @@
+<div class="container">
+    <div ng-show="model.error" class="alert alert-danger alert-dismissible">
+        {{model.error}}
+    </div>
+    <h1>Login</h1>
+    <form name="myForm" novalidate>
+        <input ng-model="model.user.username" name="username" class="form-control" type="text" placeholder="username"
+               required autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+        <span ng-show="myForm.$submitted && myForm.username.$error.required" class="help-block">
+                Please input username
+        </span>
+        <input ng-model="model.user.password" name="password" class="form-control" type="password"
+               placeholder="password" required/>
+        <span ng-show="myForm.$submitted && myForm.password.$error.required" class="help-block">
+                Please input password
+        </span>
+        <button type="submit" ng-click="myForm.$valid && model.login(model.user)" class="btn btn-primary btn-block">
+            login
+        </button>
+        <a class="btn btn-success btn-block"
+                href="#/register">Register
+        </a>
+        <a href="/auth/facebook" class="btn btn-primary btn-block">
+            <span class="fa fa-facebook"></span>
+            Facebook
+        </a>
+        <img id="loginCollage" src="images/loginCollage.jpg">
+    </form>
+</div>

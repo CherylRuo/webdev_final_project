@@ -1,0 +1,29 @@
+<div class="container">
+    <div ng-show="model.error" class="alert alert-danger alert-dismissible">
+        {{model.error}}
+    </div>
+    <h1>Register</h1>
+    <form name="myForm" novalidate>
+        <input ng-model="model.user.username" name="username" class="form-control" type="text" placeholder="username"
+               required/>
+        <span ng-show="myForm.$submitted && myForm.username.$error.required" class="help-block">
+                Please input username.
+        </span>
+        <input ng-model="model.user.password" name="password" class="form-control" type="password"
+               placeholder="password" required/>
+        <span ng-show="myForm.$submitted && myForm.password.$error.required" class="help-block">
+               Please input password.
+        </span>
+        <input ng-model="model.user.verifypassword" name="verifypassword" class="form-control" type="password"
+               placeholder="verify password"/>
+        <span ng-show="model.user.password != model.user.verifypassword" class="help-block">
+               Passwords are not match.
+        </span>
+        <button type="submit" class="btn btn-primary btn-block"
+                ng-click="myForm.$valid && model.register(model.user)">Register
+        </button>
+        <a class="btn btn-danger  btn-block"
+                href="#/login">Cancel
+        </a>
+    </form>
+</div>
