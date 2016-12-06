@@ -4,6 +4,7 @@
 module.exports = function(mongoose) {
     var Theme = mongoose.Schema({
         _user: {type: Number, ref: 'UserModel'},
+        _theme: {type: Number, ref: 'ThemeModel'},
         name: String,
         description: String,
         snatches: [{type: Number, ref: 'SnatchModel'}],

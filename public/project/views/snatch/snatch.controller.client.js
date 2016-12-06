@@ -6,7 +6,7 @@
         .module("WebAppMaker")
         .controller("SnatchListController", SnatchListController)
         .controller("EditSnatchController", EditSnatchController);
-    function SnatchListController($routeParams, SnatchService) {
+    function SnatchListController($routeParams, SnatchService, $location) {
         var vm = this;
         var themeId = parseInt($routeParams.tid);
         var userId = parseInt($routeParams.uid);
@@ -20,14 +20,10 @@
             });
         vm.createSnatch = createSnatch;
         function createSnatch(snatch) {
-            if (snatch == null) {
-                vm.alert = "Please create a new snatch.";
-                return;
-            }
             var promise = SnatchService.createSnatch(vm.themeId, snatch);
             promise.then(
                 function (response) {
-                    $location.url("/user/" + userId + "/theme/" + themeId + "/snatch" + snatchId);
+                    $location.url("/user/" + userId + "/theme/" + themeId + "/snatch/" + response.data._id);
                 },
                 function (httpError) {
                     vm.error = "Cannot create snatch."
@@ -44,16 +40,16 @@
         var snatchId = parseInt($routeParams.sid);
         var userId = parseInt($routeParams.uid);
         var themeId = parseInt($routeParams.tid);
-        var promise = SnatchService.findAllSnatchsForTheme(themeId);
+        // var promise = SnatchService.findAllSnatchsForTheme(themeId);
+        // promise.then(
+        //     function (response) {
+        //         vm.snatches = response.data;
+        //     },
+        //     function (httpError) {
+        //         vm.error = "Cannot find snatch for this theme."
+        //     });
+        var promise = SnatchService.findSnatchById(snatchId);
         promise.then(
-            function (response) {
-                vm.snatches = response.data;
-            },
-            function (httpError) {
-                vm.error = "Cannot find snatch for this theme."
-            });
-        var promise1 = SnatchService.findSnatchById(snatchId);
-        promise1.then(
             function (response) {
                 vm.snatch = response.data;
             },

@@ -3,7 +3,7 @@
         <div class="col-xs-1 col-sm-1">
             <div class="navbar-header">
                 <p class="navbar-text">
-                    <a href="#/user/{{model.userId}}/theme/{{model.themeId}}" class="navbar-link">
+                    <a href="#/user/{{model.userId}}/theme" class="navbar-link">
                         <span class="glyphicon glyphicon-chevron-left"></span></a>
                 </p>
             </div>
@@ -33,12 +33,11 @@
     <ul>
         <li ng-repeat="snatch in model.snatches">
             <div class="container-fluid row">
-                <div>
-                        <img ng-src="{{snatch.url}}">
-                </div>
-                <div class="col-xs-2">
+                <div class="col-xs-4">
                     <a href="#/user/{{model.userId}}/theme/{{model.themeId}}/snatch/{{snatch._id}}" class="nounderline">
-                        <span class="glyphicon glyphicon-cog"></span></a>
+                        <img ng-src="{{snatch.url}}">
+                        <text>{{snatch.description}}</text>
+                    </a>
                 </div>
             </div>
         </li>

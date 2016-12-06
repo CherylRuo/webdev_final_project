@@ -81,20 +81,27 @@ module.exports = function(db, mongoose) {
             if(err) {
                 deferred.reject(err);
             } else {
-                var themeId = snatch._theme;
+                console.log("theme ids is");
+                var themeIds = snatch._theme;
+                console.log(themeIds);
                 SnatchModel.remove({_id: snatchId}, function(err, status) {
                     if(err) {
                         deferred.reject(err);
                     } else {
                         deferred.resolve(status);
-                        ThemeModel.findById(themeId, function (err, theme) {
-                            var snatches = theme.snatches;
-                            for(var i=snatches.length-1; i>0; i--) {
-                                if(snatches[i] == snatchId)
-                                    snatches.splice(i, 1);
-                            }
-                            theme.save(function () {});
-                        });
+                        for(var i = 0; i<themeIds.length; i++) {
+                            var themeId = themeIds[i];
+                            ThemeModel.findById(themeId, function (err, theme) {
+                                console.log("Theme id is: ");
+                                console.log(themeId);
+                                var snatches = theme.snatches;
+                                for (var j = snatches.length - 1; j > 0; j--) {
+                                    if (snatches[j] == snatchId)
+                                        snatches.splice(j, 1);
+                                }
+                                theme.save(function () {});
+                            });
+                        }
                     }
                 });
             }
