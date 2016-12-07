@@ -23,6 +23,14 @@ body {
     height: auto;
 }
 
+#image {
+    position:relative;
+    width: 300px;
+    display: inline-block;
+    float:left;
+    padding:10px;
+}
+
 .nounderline {
     text-decoration: none !important
 }
@@ -34,4 +42,18 @@ ul {
 li {
     margin: 20px;
     list-style-type: none;
+}
+
+.datepickerdemoBasicUsage {
+    /** Demo styles for mdCalendar. */
+}
+
+.datepickerdemoBasicUsage md-content {
+    padding-bottom: 200px;
+}
+
+.datepickerdemoBasicUsage .validation-messages {
+    font-size: 12px;
+    color: #dd2c00;
+    margin-left: 15px;
 }

@@ -8,7 +8,8 @@ module.exports = function(mongoose) {
         description: String,
         snatches: [{type: Number, ref: 'SnatchModel'}],
         dateCreated: {type: Date, default: Date.now},
-        url: String
+        url: String,
+        comments: [{type: String}]
     }, {collection: "snatch"});
     return Snatch;
 };
