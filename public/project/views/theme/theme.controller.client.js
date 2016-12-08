@@ -11,8 +11,16 @@
     function ThemeListController($routeParams, ThemeService) {
         var vm = this;
         var userId = parseInt($routeParams.uid);
-        var promise = ThemeService.findAllThemesForUser(userId);
+        var promise = ThemeService.findFollowedUsersByUserId(userId);
         promise.then(
+            function(response){
+                vm.followedUsers = response.data;
+            },
+            function (httpError) {
+                vm.error = "Cannot find followed users for this user."
+            });
+        var promise1 = ThemeService.findAllThemesForUser(userId);
+        promise1.then(
             function(response){
                 vm.themes = response.data;
             },

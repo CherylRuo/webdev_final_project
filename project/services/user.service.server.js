@@ -33,6 +33,7 @@ module.exports = function (app, model) {
             successRedirect: '/assignment/#/user',
             failureRedirect: '/assignment/#/login'
         }));
+    app.get("/api/followedUsers/", findFollowedUsersByUserId);
     app.put('/api/user/:userId', updateUser);
     app.delete('/api/user/:userId', unregisterUser);
 
@@ -136,11 +137,23 @@ module.exports = function (app, model) {
     }
 
     function findUserById(req, res) {
-        console.log(req.params.userId);
         model
             .findUserById(req.params.userId)
             .then(function (user) {
                 res.json(user);
+            });
+    }
+
+    function findFollowedUsersByUserId(req, res) {
+        model
+            .findUserById(req.params.userId)
+            .then(function (user) {
+                var followedUserIds = user.user_followed;
+                model
+                    .findUserByIds(followedUserIds)
+                    .then(function (followedUsers) {
+                        res.json(followedUsers);
+                    });
             });
     }
 

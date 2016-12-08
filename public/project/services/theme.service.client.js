@@ -10,6 +10,7 @@
             createTheme  : createTheme,
             findAllThemesForUser : findAllThemesForUser,
             findThemeById : findThemeById,
+            findFollowedUsersByUserId : findFollowedUsersByUserId,
             updateTheme : updateTheme,
             deleteTheme : deleteTheme
         };
@@ -28,6 +29,11 @@
         function findThemeById(themeId) {
             return $http
                 .get("/api/theme/" + themeId)
+        }
+
+        function findFollowedUsersByUserId(userId) {
+            return $http
+                .get("/api/followedUsers/" + userId)
         }
 
         function updateTheme(themeId, theme) {

@@ -56,10 +56,10 @@
 
 <div class="col-xs-4">
     <ul>
-        <li ng-repeat="theme in model.themes">
+        <li ng-repeat="user in model.followedUsers">
             <div class="container-fluid row">
-                <a href="#/user/{{model.userId}}/theme"
-                   class="nounderline">{{theme._user}}</a>
+                <a href="#/user/{{user._id}}/theme"
+                   class="nounderline">{{user.username}}</a>
             </div>
         </li>
     </ul>
