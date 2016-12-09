@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bbb97094-f222-4ea4-8c58-19995541c1d8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project/model/snatch/snatch.schema.server.js" afterPath="$PROJECT_DIR$/project/model/snatch/snatch.schema.server.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/project/css/style.css" afterPath="$PROJECT_DIR$/public/project/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/project/views/snatch/snatch-list.view.client.html" afterPath="$PROJECT_DIR$/public/project/views/snatch/snatch-list.view.client.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/project/views/snatch/snatch.controller.client.js" afterPath="$PROJECT_DIR$/public/project/views/snatch/snatch.controller.client.js" />
     </list>
     <ignored path="webdev_final_project.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,7 +25,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="snatch-list.view.client.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="snatch-list.view.client.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/project/views/snatch/snatch-list.view.client.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="361">
@@ -38,11 +35,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/project/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
-              <caret line="48" column="26" selection-start-line="48" selection-start-column="26" selection-end-line="48" selection-end-column="26" />
+            <state relative-caret-position="307">
+              <caret line="56" column="16" selection-start-line="56" selection-start-column="16" selection-end-line="56" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -121,9 +118,9 @@
         <option value="$PROJECT_DIR$/public/project/views/theme/theme-list.view.client.html" />
         <option value="$PROJECT_DIR$/public/project/views/theme/theme.controller.client.js" />
         <option value="$PROJECT_DIR$/project/model/snatch/snatch.schema.server.js" />
-        <option value="$PROJECT_DIR$/public/project/css/style.css" />
         <option value="$PROJECT_DIR$/public/project/views/snatch/snatch.controller.client.js" />
         <option value="$PROJECT_DIR$/public/project/views/snatch/snatch-list.view.client.html" />
+        <option value="$PROJECT_DIR$/public/project/css/style.css" />
       </list>
     </option>
   </component>
@@ -555,12 +552,12 @@
       <workItem from="1480315284884" duration="26000" />
       <workItem from="1480315344330" duration="14210000" />
       <workItem from="1480397631162" duration="18498000" />
-      <workItem from="1480887786205" duration="38490000" />
+      <workItem from="1480887786205" duration="38670000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="71653000" />
+    <option name="totallyTimeSpent" value="71833000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="773" extended-state="0" />
@@ -943,14 +940,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/project/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
-          <caret line="48" column="26" selection-start-line="48" selection-start-column="26" selection-end-line="48" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/project/views/snatch/snatch.controller.client.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
@@ -963,6 +952,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="361">
           <caret line="46" column="18" selection-start-line="46" selection-start-column="18" selection-end-line="46" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/project/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="307">
+          <caret line="56" column="16" selection-start-line="56" selection-start-column="16" selection-end-line="56" selection-end-column="16" />
           <folding />
         </state>
       </provider>

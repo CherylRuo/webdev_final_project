@@ -44,6 +44,10 @@ li {
     list-style-type: none;
 }
 
+pre {
+
+}
+
 .vr {
     width:3px;
     background-color:#000;
