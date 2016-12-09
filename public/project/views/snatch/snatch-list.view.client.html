@@ -29,17 +29,17 @@
     </div>
 </nav>
 
-<div class="col-xs-12 col-sm-8">
+<div class="container">
     <ul>
         <li ng-repeat="snatch in model.snatches">
             <div class="container-fluid row">
                 <div class="col-xs-4">
                     <a href="#/user/{{model.userId}}/theme/{{model.themeId}}/snatch/{{snatch._id}}" class="nounderline">
                         <img id="image" ng-src="{{snatch.url}}">
-                        <label for="des">Description</label>
-                        <textarea id="des">{{snatch.description}}</textarea>
-                        <!--<text name="themes">{{model.snatch._theme}}</text>-->
                     </a>
+                    <text>{{snatch.dateCreated}}</text>
+                    <label for="des">Description</label>
+                    <textarea id="des" readonly>{{snatch.description}}</textarea>
                     <label for="comment">Comment</label>
                     <textarea name='comment' id='comment'></textarea>
                     <button type="button">Submit</button>

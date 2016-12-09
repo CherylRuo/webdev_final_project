@@ -18,6 +18,7 @@
             function (httpError) {
                 vm.error = "Cannot find snatch for this theme."
             });
+
         vm.createSnatch = createSnatch;
         function createSnatch(snatch) {
             var promise = SnatchService.createSnatch(vm.themeId, snatch);
@@ -33,25 +34,28 @@
         vm.themeId = themeId;
     }
 
-
-
-    function EditSnatchController($location, $routeParams, SnatchService) {
+    function EditSnatchController($location, $routeParams, SnatchService, ThemeService) {
         var vm = this;
         var snatchId = parseInt($routeParams.sid);
         var userId = parseInt($routeParams.uid);
         var themeId = parseInt($routeParams.tid);
-        // var promise = SnatchService.findAllSnatchsForTheme(themeId);
-        // promise.then(
-        //     function (response) {
-        //         vm.snatches = response.data;
-        //     },
-        //     function (httpError) {
-        //         vm.error = "Cannot find snatch for this theme."
-        //     });
         var promise = SnatchService.findSnatchById(snatchId);
+        var themeName = "";
         promise.then(
             function (response) {
                 vm.snatch = response.data;
+                var themeIds = vm.snatch._theme;
+                for(var i=0; i<themeIds.length; i++) {
+                    var promise1 = ThemeService.findThemeById(themeIds[i]);
+                    promise1.then(
+                        function (response1) {
+                            themeName += "#" + response1.data.name + " ";
+                            vm.themeName = themeName;
+                        },
+                        function (httpError) {
+                            vm.error = "Cannot find snatch."
+                        });
+                }
             },
             function (httpError) {
                 vm.error = "Cannot find snatch."

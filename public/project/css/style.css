@@ -44,6 +44,15 @@ li {
     list-style-type: none;
 }
 
+.vr {
+    width:3px;
+    background-color:#000;
+    position:absolute;
+    top:0;
+    bottom:0;
+    right:460px;
+}
+
 .datepickerdemoBasicUsage {
     /** Demo styles for mdCalendar. */
 }
