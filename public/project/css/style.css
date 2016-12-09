@@ -53,6 +53,10 @@ li {
     right:460px;
 }
 
+.noborder {
+    border: none;
+}
+
 .datepickerdemoBasicUsage {
     /** Demo styles for mdCalendar. */
 }

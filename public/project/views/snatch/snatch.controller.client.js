@@ -6,7 +6,7 @@
         .module("WebAppMaker")
         .controller("SnatchListController", SnatchListController)
         .controller("EditSnatchController", EditSnatchController);
-    function SnatchListController($routeParams, SnatchService, $location) {
+    function SnatchListController($routeParams, SnatchService, UserService, $location) {
         var vm = this;
         var themeId = parseInt($routeParams.tid);
         var userId = parseInt($routeParams.uid);
@@ -30,6 +30,30 @@
                     vm.error = "Cannot create snatch."
                 });
         }
+
+        vm.addCommentToSnatch = addCommentToSnatch;
+        function addCommentToSnatch(snatch) {
+            var promise = UserService.findUserById(userId);
+            promise.then(
+                function (response) {
+                    var username = response.data.username;
+                    if(snatch.comment == undefined) {
+                        snatch.comment = username + ": " + vm.textModel;
+                    } else {
+                        snatch.comment += "\n" + username + ": " + vm.textModel;
+                    }
+                    var promise = SnatchService.updateSnatch(snatch._id, snatch);
+                    promise.then(
+                        function (response) {
+                            $location.url("/user/" + userId + "/theme/" + themeId + "/snatch");
+                        },
+                        function (httpError) {
+                            vm.error = "Cannot update snatch."
+                        });
+                }
+            )
+        }
+
         vm.userId = userId;
         vm.themeId = themeId;
     }

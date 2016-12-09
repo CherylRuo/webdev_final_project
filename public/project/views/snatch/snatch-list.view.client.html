@@ -37,12 +37,12 @@
                     <a href="#/user/{{model.userId}}/theme/{{model.themeId}}/snatch/{{snatch._id}}" class="nounderline">
                         <img id="image" ng-src="{{snatch.url}}">
                     </a>
-                    <text>{{snatch.dateCreated}}</text>
-                    <label for="des">Description</label>
-                    <textarea id="des" readonly>{{snatch.description}}</textarea>
-                    <label for="comment">Comment</label>
-                    <textarea name='comment' id='comment'></textarea>
-                    <button type="button">Submit</button>
+                    <p>{{snatch.dateCreated}}</p><br>
+                    <p class="noborder" id="des" readonly>{{snatch.description}}</p>
+                    <pre class="noborder" name='comments' id='comments'>{{snatch.comment}}</pre>
+                    <textarea ng-model="model.textModel" name='newcomment' id='newcomment'
+                              placeholder="Add a comment..."></textarea>
+                    <button ng-click="model.addCommentToSnatch(snatch)" type="button">Submit</button>
                 </div>
             </div>
         </li>
