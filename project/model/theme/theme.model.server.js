@@ -10,6 +10,8 @@ module.exports = function(db, mongoose) {
         createThemeForUser: createThemeForUser,
         findAllThemesForUser: findAllThemesForUser,
         findThemeById: findThemeById,
+        searchThemes: searchThemes,
+        searchUsers: searchUsers,
         updateTheme: updateTheme,
         deleteTheme: deleteTheme
     };
@@ -56,6 +58,49 @@ module.exports = function(db, mongoose) {
             }
         });
 
+        return deferred.promise;
+    }
+
+    function searchThemes(themeQuery) {
+        var deferred = q.defer();
+        console.log(themeQuery);
+        ThemeModel.search(themeQuery, {name: 1}, {
+            conditions: {name: {$exists: true}},
+            sort: {name: 1},
+            limit: 10
+        }, function(err, data) {
+            if(err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(data.results);
+            }
+            // array of finded results
+            console.log(data.results);
+            // count of all matching objects
+            console.log(data.totalCount);
+        });
+
+        return deferred.promise;
+    }
+
+    function searchUsers(userQuery) {
+        var deferred = q.defer();
+
+        UserModel.search(userQuery, {username: 1}, {
+            conditions: {username: {$exists: true}},
+            sort: {username: 1},
+            limit: 10
+        }, function(err, data) {
+            if(err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(data.results);
+            }
+            // array of finded results
+            console.log(data.results);
+            // count of all matching objects
+            console.log(data.totalCount);
+        });
         return deferred.promise;
     }
 

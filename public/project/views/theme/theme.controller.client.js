@@ -8,7 +8,7 @@
         .controller("NewThemeController", NewThemeController)
         .controller("EditThemeController", EditThemeController);
 
-    function ThemeListController($routeParams, ThemeService) {
+    function ThemeListController($routeParams, ThemeService, $location, UserService) {
         var vm = this;
         var userId = parseInt($routeParams.uid);
         var promise = ThemeService.findFollowedUsersByUserId(userId);
@@ -27,6 +27,78 @@
             function (httpError) {
                 vm.error = "Cannot find theme for this user."
             });
+
+        vm.keywords = ["Themes", "Users"];
+
+        vm.searchQuery = searchQuery;
+        function searchQuery(query) {
+            if (vm.selectedName == "Themes") {
+                var promise = ThemeService.searchThemes(query);
+                promise.then(
+                    function (response) {
+                        vm.themeSearchResult = response.data;
+                    },
+                    function (httpError) {
+                        vm.error = "Cannot find themes."
+                    });
+            } else {
+                var promise = ThemeService.searchUsers(query);
+                promise.then(
+                    function (response) {
+                        vm.userSearchResult = response.data;
+                        for(var i=vm.userSearchResult.length-1; i>=0; i--) {
+                            if(vm.userSearchResult[i]._id == userId) {
+                                vm.userSearchResult.splice(i, 1);
+                            }
+                        }
+                    },
+                    function (httpError) {
+                        vm.error = "Cannot find users."
+                    });
+            }
+        }
+
+        vm.followUser = followUser;
+        function followUser(followUserId) {
+            var promise = UserService.findUserById(userId);
+            promise.then(
+                function (response) {
+                    var currentUser = response.data;
+                    currentUser.user_followed.push(followUserId);
+                    var promise1 = UserService.updateUser(userId, currentUser);
+                    promise1.then(
+                        function(response) {
+                            $location.url("/user/"+ userId +"/theme");
+                        },
+                        function (httpError) {
+                            vm.error = "Error!";
+                        });
+                },
+                function (httpError) {
+                    vm.error = "Error!";
+                });
+        }
+
+        vm.followTheme = followTheme;
+        function followTheme(followThemeId) {
+            var promise = UserService.findUserById(userId);
+            promise.then(
+                function (response) {
+                    var currentUser = response.data;
+                    currentUser.themes_followed.push(followThemeId);
+                    var promise1 = UserService.updateUser(userId, currentUser);
+                    promise1.then(
+                        function(response) {
+                            $location.url("/user/"+ userId +"/theme");
+                        },
+                        function (httpError) {
+                            vm.error = "Error!";
+                        });
+                },
+                function (httpError) {
+                    vm.error = "Error!";
+                });
+        }
         vm.userId = userId;
     }
 

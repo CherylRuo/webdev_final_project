@@ -44,8 +44,8 @@ li {
     list-style-type: none;
 }
 
-pre {
-
+.followed {
+    padding-right: 10px;
 }
 
 .vr {
@@ -54,7 +54,16 @@ pre {
     position:absolute;
     top:0;
     bottom:0;
-    right:460px;
+    left: 33%;
+}
+
+.vr1 {
+    width:3px;
+    background-color:#000;
+    position:absolute;
+    top:0;
+    bottom:0;
+    right:35%;
 }
 
 .noborder {

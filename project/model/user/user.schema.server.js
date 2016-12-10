@@ -1,7 +1,7 @@
 /**
  * Created by CherylRuo on 11/9/16.
  */
-module.exports = function(mongoose) {
+module.exports = function(mongoose, searchPlugin) {
     var User = mongoose.Schema({
         username: String,
         password: String,
@@ -17,5 +17,8 @@ module.exports = function(mongoose) {
         snatches: [{type: Number, ref: 'SnatchModel'}],
         dateCreated: {type: Date, default: Date.now}
     }, {collection: "user"});
+    User.plugin(searchPlugin, {
+        fields: ['username']
+    });
     return User;
 };

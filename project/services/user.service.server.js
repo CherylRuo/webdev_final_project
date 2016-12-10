@@ -33,7 +33,7 @@ module.exports = function (app, model) {
             successRedirect: '/assignment/#/user',
             failureRedirect: '/assignment/#/login'
         }));
-    app.get("/api/followedUsers/", findFollowedUsersByUserId);
+    app.get("/api/followedUsers/:userId", findFollowedUsersByUserId);
     app.put('/api/user/:userId', updateUser);
     app.delete('/api/user/:userId', unregisterUser);
 
