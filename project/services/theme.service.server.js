@@ -9,6 +9,7 @@ module.exports = function (app, model) {
     app.get('/api/theme/:themeId', findThemeById);
     app.get('/api/searchThemes/:themeQuery', searchThemes);
     app.get('/api/searchUsers/:userQuery', searchUsers);
+    app.get("/api/themelist", findAllThemes);
     app.put('/api/theme/:themeId', updateTheme);
     app.delete('/api/theme/:themeId', deleteTheme);
 
@@ -41,6 +42,14 @@ module.exports = function (app, model) {
             .findThemeById(req.params.themeId)
             .then(function(theme) {
                 res.json(theme);
+            });
+    }
+
+    function findAllThemes(req, res) {
+        model
+            .findAllThemes()
+            .then(function (themes) {
+                res.json(themes);
             });
     }
 

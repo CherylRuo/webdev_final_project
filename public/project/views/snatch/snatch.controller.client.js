@@ -6,8 +6,11 @@
         .module("WebAppMaker")
         .controller("SnatchListController", SnatchListController)
         .controller("EditSnatchController", EditSnatchController);
-    function SnatchListController($routeParams, SnatchService, UserService, $location) {
+    function SnatchListController($routeParams, SnatchService, UserService, $location, $rootScope) {
         var vm = this;
+        vm.logout = logout;
+        vm.createSnatch = createSnatch;
+        vm.addCommentToSnatch = addCommentToSnatch;
         var themeId = parseInt($routeParams.tid);
         var userId = parseInt($routeParams.uid);
         var promise = SnatchService.findAllSnatchsForTheme(themeId);
@@ -19,7 +22,6 @@
                 vm.error = "Cannot find snatch for this theme."
             });
 
-        vm.createSnatch = createSnatch;
         function createSnatch(snatch) {
             var promise = SnatchService.createSnatch(vm.themeId, snatch);
             promise.then(
@@ -31,7 +33,6 @@
                 });
         }
 
-        vm.addCommentToSnatch = addCommentToSnatch;
         function addCommentToSnatch(snatch) {
             var promise = UserService.findUserById(userId);
             promise.then(
@@ -53,6 +54,16 @@
                 }
             )
         }
+        function logout() {
+            UserService
+                .logout()
+                .then(
+                    function (response) {
+                        $rootScope.currentUser = null;
+                        $location.url("/");
+                    });
+        }
+
 
         vm.userId = userId;
         vm.themeId = themeId;
@@ -60,9 +71,12 @@
 
     function EditSnatchController($location, $routeParams, SnatchService, ThemeService) {
         var vm = this;
+        vm.updateSnatch = updateSnatch;
+        vm.deleteSnatch = deleteSnatch;
         var snatchId = parseInt($routeParams.sid);
         var userId = parseInt($routeParams.uid);
         var themeId = parseInt($routeParams.tid);
+
         var promise = SnatchService.findSnatchById(snatchId);
         var themeName = "";
         promise.then(
@@ -84,8 +98,7 @@
             function (httpError) {
                 vm.error = "Cannot find snatch."
             });
-        vm.updateSnatch = updateSnatch;
-        vm.deleteSnatch = deleteSnatch;
+
         function updateSnatch(updateSnatch) {
             var promise = SnatchService.updateSnatch(snatchId, updateSnatch);
             promise.then(

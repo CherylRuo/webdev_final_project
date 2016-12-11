@@ -12,6 +12,7 @@
             findThemeById : findThemeById,
             findFollowedUsersByUserId : findFollowedUsersByUserId,
             findFollowedThemesByUserId : findFollowedThemesByUserId,
+            findAllThemes: findAllThemes,
             searchThemes : searchThemes,
             searchUsers : searchUsers,
             updateTheme : updateTheme,
@@ -42,6 +43,11 @@
         function findFollowedThemesByUserId(userId) {
             return $http
                 .get("/api/followedThemes/" + userId)
+        }
+
+        function findAllThemes() {
+            return $http
+                .get("/api/themelist")
         }
 
         function searchThemes(themeQuery) {

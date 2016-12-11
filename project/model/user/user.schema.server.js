@@ -14,7 +14,7 @@ module.exports = function(mongoose, searchPlugin) {
         privacy: Boolean,
         user_followed: [{type: Number, ref: 'UserModel'}],
         themes_followed: [{type: Number, ref: 'ThemeModel'}],
-        snatches: [{type: Number, ref: 'SnatchModel'}],
+        themes: [{type: Number, ref: 'ThemeModel'}],
         dateCreated: {type: Date, default: Date.now}
     }, {collection: "user"});
     User.plugin(searchPlugin, {

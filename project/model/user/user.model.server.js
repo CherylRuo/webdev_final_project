@@ -12,6 +12,7 @@ module.exports = function (db, mongoose) {
         findUserByFacebookId: findUserByFacebookId,
         findUserByUsername: findUserByUsername,
         findUserByCredentials: findUserByCredentials,
+        findAllUsers: findAllUsers,
         updateUser: updateUser,
         deleteUser: deleteUser
     };
@@ -81,11 +82,25 @@ module.exports = function (db, mongoose) {
     function findUserByUsername(username) {
         var deferred = q.defer();
 
-        UserModel.findOne({username: username}, function (err, username) {
+        UserModel.findOne({username: username}, function (err, users) {
             if (err) {
                 deferred.reject(err);
             } else {
-                deferred.resolve(username);
+                deferred.resolve(users);
+            }
+        });
+
+        return deferred.promise;
+    }
+
+    function findAllUsers() {
+        var deferred = q.defer();
+
+        UserModel.find({}, function (err, users) {
+            if (err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(users);
             }
         });
 

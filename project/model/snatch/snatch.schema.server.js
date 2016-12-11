@@ -6,7 +6,6 @@ module.exports = function(mongoose) {
         _user: {type: Number, ref: 'UserModel'},
         _theme: [{type: Number, ref: 'ThemeModel'}],
         description: String,
-        snatches: [{type: Number, ref: 'SnatchModel'}],
         dateCreated: {type: Date, default: Date.now},
         url: String,
         comment: {type: String}

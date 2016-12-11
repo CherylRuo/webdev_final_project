@@ -11,6 +11,7 @@
             findUserById: findUserById,
             findUserByUsername: findUserByUsername,
             findUserByCredentials: findUserByCredentials,
+            findAllUsers: findAllUsers,
             updateUser: updateUser,
             unregisterUser: unregisterUser,
             login: login,
@@ -47,6 +48,11 @@
             return $http
                 .get("/api/user?username=" + username + "&password=" + password)
 
+        }
+
+        function findAllUsers() {
+            return $http
+                .get("/api/userlist")
         }
 
         function updateUser(userId, user) {

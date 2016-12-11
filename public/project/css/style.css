@@ -51,7 +51,7 @@ li {
 
 .vr {
     width:3px;
-    background-color:#000;
+    background-color:grey;
     position:absolute;
     top:0;
     bottom:0;
@@ -60,11 +60,20 @@ li {
 
 .vr1 {
     width:3px;
-    background-color:#000;
+    background-color:grey;
     position:absolute;
     top:0;
     bottom:0;
     right:35%;
+}
+
+.vr2 {
+    width:3px;
+    background-color:grey;
+    position:absolute;
+    top:0;
+    bottom:0;
+    right:50%;
 }
 
 .noborder {

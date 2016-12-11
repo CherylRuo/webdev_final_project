@@ -1,0 +1,83 @@
+<!--header-->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid row">
+        <div class="col-xs-1">
+            <div class="navbar-header">
+                <p class="navbar-text">
+                    <a href="#/user/{{model.userId}}" class="navbar-link">
+                        <span class="glyphicon glyphicon-chevron-left"></span></a>
+                </p>
+            </div>
+        </div>
+
+        <div class="col-xs-5">
+            <div class="navbar-header">
+                <a id="head" class="navbar-brand" href="#">
+                    User Management
+                </a>
+            </div>
+        </div>
+
+        <div class="col-xs-6">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                    Theme Management
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!--user list-->
+<div class="col-xs-6">
+    <ul>
+        <li ng-repeat="user in model.userlist">
+            <div class="container-fluid row">
+                <div class="col-xs-8">
+                    <p class="nounderline">{{user.username}}</p>
+                </div>
+                <button ng-click="model.deleteUser(user._id)" type="button" class="btn btn-default btn-xs">
+                    <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span> delete
+                </button>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<!--divide bar-->
+<div class="vr2 hidden-xs"></div>
+
+<!--Theme list-->
+<div class="col-xs-6">
+    <ul>
+        <li ng-repeat="theme in model.themelist">
+            <div class="container-fluid row">
+                <div class="col-xs-8">
+                    <a href="#/user/{{model.userId}}/theme/{{theme._id}}/snatch"
+                       class="text-left nounderline">{{theme.name}}</a>
+                </div>
+                <button ng-click="model.deleteTheme(theme._id)" type="button" class="btn btn-default btn-xs">
+                    <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span> delete
+                </button>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<!--footer-->
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div id="user" class="container-fluid">
+        <div class="row navbar-text">
+            <div class="col-xs-3 text-center">
+                <a href="#/user/{{model.userId}}" class="navbar-link">
+                    <span class="glyphicon glyphicon-user"></span>
+                </a>
+            </div>
+            <div class="col-xs-3 text-center">
+                <a ng-click=model.logout() class="navbar-link">
+                    <span class="glyphicon glyphicon-log-out"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>

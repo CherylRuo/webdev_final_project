@@ -11,6 +11,9 @@
         .controller("ProfileController", ProfileController);
     function ProfileController($location, $rootScope, UserService) {
         var vm = this;
+        vm.logout = logout;
+        vm.updateUser = updateUser;
+        vm.unregister = unregister;
         vm.userId = $rootScope.currentUser._id;
         var userId = vm.userId;
         var promise = UserService.findUserById(userId);
@@ -21,7 +24,6 @@
             function (httpError) {
                 vm.error = "Error!";
             });
-        vm.updateUser = updateUser;
         function updateUser(updateUser) {
             var promise = UserService.updateUser(userId, updateUser);
             promise.then(
@@ -33,7 +35,6 @@
                 });
         }
 
-        vm.logout = logout;
         function logout() {
             UserService
                 .logout()
@@ -42,6 +43,22 @@
                         $rootScope.currentUser = null;
                         $location.url("/");
                     });
+        }
+
+        function unregister() {
+            UserService
+                .deleteUser(vm.userId)
+                .then(
+                    function (response) {
+                        // Take the user to login page on successful deletion
+                        $rootScope.currentUser = null;
+                        $location.url("/login");
+                    },
+                    function (httpError) {
+                        // Display failure message
+                        vm.deleteError = "Error! ";
+                    }
+                );
         }
     }
 })();

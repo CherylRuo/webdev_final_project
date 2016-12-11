@@ -12,6 +12,7 @@ module.exports = function(db, mongoose) {
         findFollowedThemesForUser: findFollowedThemesForUser,
         findThemeById: findThemeById,
         findThemeByIds: findThemeByIds,
+        findAllThemes: findAllThemes,
         searchThemes: searchThemes,
         searchUsers: searchUsers,
         updateTheme: updateTheme,
@@ -91,6 +92,20 @@ module.exports = function(db, mongoose) {
         return deferred.promise;
     }
 
+    function findAllThemes() {
+        var deferred = q.defer();
+
+        ThemeModel.find({}, function (err, themes) {
+            if (err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(themes);
+            }
+        });
+
+        return deferred.promise;
+    }
+
     function searchThemes(themeQuery) {
         var deferred = q.defer();
         console.log(themeQuery);
@@ -157,6 +172,7 @@ module.exports = function(db, mongoose) {
                 deferred.reject(err);
             } else {
                 var userId = theme._user;
+                console.log(userId);
                 ThemeModel.remove({_id: themeId}, function(err, status) {
                     if(err) {
                         deferred.reject(err);

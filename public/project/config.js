@@ -23,6 +23,21 @@
         });
         return deferred.promise;
     };
+    var checkIsAdmin = function($q, $timeout, $http, $location, $rootScope) {
+        var deferred = $q.defer();
+        $http.get('/api/isAdmin').success(function(user) {
+            $rootScope.errorMessage = null;
+            if (user !== '0') {
+                $rootScope.currentUser = user;
+                deferred.resolve();
+            } else {
+                $rootScope.currentUser = null;
+                deferred.reject();
+                $location.url('/');
+            }
+        });
+        return deferred.promise;
+    };
     function Config($routeProvider) {
         $routeProvider
             .when("/", {
@@ -76,6 +91,13 @@
                 templateUrl: "views/snatch/snatch-edit.view.client.html",
                 controller: "EditSnatchController",
                 controllerAs: "model"
-            });
+            })
+            .when("/admin", {
+                    templateUrl: "views/admin/admin.view.client.html",
+                    controller: "AdminController",
+                    controllerAs: "model",
+                    resolve: {isAdmin: checkIsAdmin}
+                })
+            .otherwise({redirectTo: "/"});
     }
 })();

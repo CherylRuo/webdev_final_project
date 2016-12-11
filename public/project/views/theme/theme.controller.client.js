@@ -8,8 +8,15 @@
         .controller("NewThemeController", NewThemeController)
         .controller("EditThemeController", EditThemeController);
 
-    function ThemeListController($routeParams, ThemeService, $location, UserService, $route) {
+    function ThemeListController($routeParams, ThemeService, UserService, $route, $location, $rootScope) {
         var vm = this;
+        vm.logout = logout;
+        vm.unfollowTheme = unfollowTheme;
+        vm.searchQuery = searchQuery;
+        vm.followUser = followUser;
+        vm.unfollowUser = unfollowUser;
+        vm.followTheme = followTheme;
+
         var userId = parseInt($routeParams.uid);
         var promise = ThemeService.findFollowedUsersByUserId(userId);
         promise.then(
@@ -40,7 +47,6 @@
 
         vm.keywords = ["Themes", "Users"];
 
-        vm.searchQuery = searchQuery;
         function searchQuery(query) {
             if (vm.selectedName == "Themes") {
                 var promise = ThemeService.searchThemes(query);
@@ -68,7 +74,6 @@
             }
         }
 
-        vm.followUser = followUser;
         function followUser(followUserId) {
             var promise = UserService.findUserById(userId);
             promise.then(
@@ -89,7 +94,6 @@
                 });
         }
 
-        vm.unfollowUser = unfollowUser;
         function unfollowUser(followUserId) {
             var promise = UserService.findUserById(userId);
             promise.then(
@@ -114,7 +118,6 @@
                 });
         }
 
-        vm.followTheme = followTheme;
         function followTheme(followThemeId) {
             var promise = UserService.findUserById(userId);
             promise.then(
@@ -134,8 +137,6 @@
                     vm.error = "Error!";
                 });
         }
-
-        vm.unfollowTheme = unfollowTheme;
         function unfollowTheme(followThemeId) {
             var promise = UserService.findUserById(userId);
             promise.then(
@@ -159,12 +160,24 @@
                     vm.error = "Error!";
                 });
         }
+        function logout() {
+            UserService
+                .logout()
+                .then(
+                    function (response) {
+                        $rootScope.currentUser = null;
+                        $location.url("/");
+                    });
+        }
+
 
         vm.userId = userId;
     }
 
     function NewThemeController($location, $routeParams, ThemeService) {
         var vm = this;
+        vm.createTheme = createTheme;
+
         var userId = parseInt($routeParams.uid);
         var promise = ThemeService.findAllThemesForUser(userId);
         promise.then(
@@ -174,7 +187,6 @@
             function (httpError) {
                 vm.error = "Cannot find theme for this user."
             });
-        vm.createTheme = createTheme;
         function createTheme(theme) {
             if(theme == null) {
                 vm.alert = "Please create a theme.";
@@ -195,6 +207,8 @@
 
     function EditThemeController($location, $routeParams, ThemeService) {
         var vm = this;
+        vm.updateTheme = updateTheme;
+        vm.deleteTheme = deleteTheme;
         var userId = parseInt($routeParams.uid);
         var themeId = parseInt($routeParams.tid);
 
@@ -214,8 +228,7 @@
             function (httpError) {
                 vm.error = "Cannot find theme for this user."
             });
-        vm.updateTheme = updateTheme;
-        vm.deleteTheme = deleteTheme;
+
         function updateTheme(updateTheme) {
             var promise = ThemeService.updateTheme(themeId, updateTheme);
             promise.then(
