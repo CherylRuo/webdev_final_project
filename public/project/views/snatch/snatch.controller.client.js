@@ -10,7 +10,8 @@
         var vm = this;
         vm.logout = logout;
         vm.createSnatch = createSnatch;
-        vm.addCommentToSnatch = addCommentToSnatch;
+        vm.addCommentToSnatch = addCommentToSnatch
+        vm.user = $rootScope.currentUser;
         var themeId = parseInt($routeParams.tid);
         var userId = parseInt($routeParams.uid);
         var promise = SnatchService.findAllSnatchsForTheme(themeId);

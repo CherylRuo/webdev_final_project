@@ -1,0 +1,52 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid row">
+        <div class="col-xs-1 col-sm-1">
+            <div class="navbar-header">
+                <p class="navbar-text">
+                    <a href="/home.html" class="navbar-link">
+                        <span class="glyphicon glyphicon-chevron-left"></span></a>
+                </p>
+            </div>
+        </div>
+
+        <div class="col-xs-10">
+            <div class="navbar-header">
+                <a id="head" class="navbar-brand">
+                    Guest
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!--search area-->
+<div class="col-sm-6 text-center">
+    <form class="form-wrapper">
+        <input ng-model="model.query" type="text" id="searchthemes" placeholder="Search themes..." required>
+        <input ng-click="model.searchQuery(model.query)" type="submit" value="search" id="submitthemes">
+    </form>
+    <ul>
+        <li ng-repeat="theme in model.themelist">
+            <div class="container-fluid row">
+                <a href="#/guest/theme/{{theme._id}}/snatch"
+                   class="nounderline followed">{{theme.name}}</a>
+            </div>
+        </li>
+    </ul>
+    <!--<ul>-->
+        <!--<li ng-repeat="theme in model.themeSearchResult">-->
+            <!--<div class="container-fluid row">-->
+                <!--<a href="#/user/{{model.userId}}/theme/{{theme._id}}/snatch"-->
+                   <!--class="nounderline followed">{{theme.name}}</a>-->
+            <!--</div>-->
+        <!--</li>-->
+    <!--</ul>-->
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div id="guestlogin" class="container-fluid">
+        <a href="#/login" class="navbar-link">
+            <span class="glyphicon glyphicon-log-in"></span> Login/Register
+        </a>
+    </div>
+</nav>

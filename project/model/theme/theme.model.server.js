@@ -22,11 +22,10 @@ module.exports = function(db, mongoose) {
 
     function createThemeForUser(userId, theme) {
         var deferred = q.defer();
-        console.log("Create a theme.");
         theme._user = userId;
         ThemeModel.create(theme, function(err, theme) {
             UserModel.findById(userId, function (err, user) {
-                user.themes_followed.push(theme._id);
+                user.themes.push(theme._id);
                 user.save(function () {
                     deferred.resolve(theme);
                 });

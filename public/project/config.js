@@ -55,6 +55,11 @@
                 controller: "RegisterController",
                 controllerAs: "model"
             })
+            .when("/guest", {
+                templateUrl: "views/guest/guest.view.client.html",
+                controller: "GuestController",
+                controllerAs: "model"
+            })
             .when("/user", {
                 templateUrl: "views/user/profile.view.client.html",
                 controller: "ProfileController",
@@ -83,6 +88,11 @@
                 controllerAs: "model"
             })
             .when("/user/:uid/theme/:tid/snatch", {
+                templateUrl: "views/snatch/snatch-list.view.client.html",
+                controller: "SnatchListController",
+                controllerAs: "model"
+            })
+            .when("/guest/theme/:tid/snatch", {
                 templateUrl: "views/snatch/snatch-list.view.client.html",
                 controller: "SnatchListController",
                 controllerAs: "model"
