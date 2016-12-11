@@ -157,7 +157,7 @@ module.exports = function (app, model) {
             });
     }
 
-    function facebookStrategy(token, refreshToken, profile, done) {
+    function facebookStrategy(token, profile, done) {
         model
             .findUserByFacebookId(profile.id)
             .then(

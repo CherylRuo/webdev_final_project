@@ -1,3 +1,4 @@
+<!--header-->
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid row">
         <div class="col-xs-1 col-sm-1">
@@ -9,10 +10,10 @@
             </div>
         </div>
 
-        <div class="col-xs-2">
+        <div class="col-xs-4 col-sm-2">
             <div class="navbar-header">
                 <a id="head" class="navbar-brand" href="#">
-                    Themes following
+                    Themes
                 </a>
             </div>
         </div>
@@ -27,7 +28,7 @@
             </div>
         </div>
 
-        <div class="col-xs-4">
+        <div class="col-xs-6 col-sm-4">
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">
                     Users following
@@ -35,7 +36,7 @@
             </div>
         </div>
 
-        <div class="col-xs-4">
+        <div class="col-xs-4 hidden-xs">
             <div class="navbar-header">
                 <a class="navbar-brand" href="#">
                     Search
@@ -44,14 +45,16 @@
         </div>
     </div>
 </nav>
+<!--header end-->
 
-<div class="col-xs-4 col-sm-4">
+<!--Theme list-->
+<div class="col-xs-6 col-sm-4">
     <ul>
         <li ng-repeat="theme in model.themes">
             <div class="container-fluid row">
                 <div class="col-xs-8">
                     <a href="#/user/{{model.userId}}/theme/{{theme._id}}/snatch"
-                       class="nounderline">{{theme.name}}</a>
+                       class="text-left nounderline">{{theme.name}}</a>
                 </div>
                 <div class="col-xs-4">
                     <a href="#/user/{{model.userId}}/theme/{{theme._id}}" class="nounderline">
@@ -60,23 +63,48 @@
             </div>
         </li>
     </ul>
-</div>
-
-<div class="vr"></div>
-<div class="vr1"></div>
-
-<div class="col-xs-4 col-sm-4">
     <ul>
-        <li ng-repeat="user in model.followedUsers">
+        <li ng-repeat="theme in model.followedThemes">
             <div class="container-fluid row">
-                <a href="#/user/{{user._id}}/theme"
-                   class="nounderline">{{user.username}}</a>
+                <div class="col-xs-8">
+                    <a href="#/user/{{model.userId}}/theme/{{theme._id}}/snatch"
+                       class="nounderline followed">{{theme.name}}
+                    </a>
+                </div>
+                <div class="col-xs-4">
+                    <button ng-click="model.unfollowTheme(theme._id)" type="button" class="btn btn-default btn-xs">
+                        <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span> Unfollow
+                    </button>
+                </div>
             </div>
         </li>
     </ul>
 </div>
 
-<div class="col-xs-4 col-sm-4">
+<!--divide bar-->
+<div class="vr hidden-xs"></div>
+
+<!--user list-->
+<div class="col-xs-6 col-sm-4">
+    <ul>
+        <li ng-repeat="user in model.followedUsers">
+            <div class="container-fluid row">
+                <a href="#/user/{{user._id}}/theme"
+                   class="nounderline followed">{{user.username}}
+                </a>
+                <button ng-click="model.unfollowUser(user._id)" type="button" class="btn btn-default btn-xs">
+                    <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span> Unfollow
+                </button>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<!--divide bar-->
+<div class="vr1 hidden-xs"></div>
+
+<!--search area-->
+<div class="hidden-xs col-sm-4">
     <form class="form-wrapper">
         <select ng-model="model.selectedName" ng-options="x for x in model.keywords">
         </select>
@@ -107,6 +135,7 @@
     </ul>
 </div>
 
+<!--footer-->
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div id="user" class="container-fluid">
         <div class="row navbar-text">

@@ -9,7 +9,9 @@ module.exports = function(db, mongoose) {
     var api = {
         createThemeForUser: createThemeForUser,
         findAllThemesForUser: findAllThemesForUser,
+        findFollowedThemesForUser: findFollowedThemesForUser,
         findThemeById: findThemeById,
+        findThemeByIds: findThemeByIds,
         searchThemes: searchThemes,
         searchUsers: searchUsers,
         updateTheme: updateTheme,
@@ -58,6 +60,34 @@ module.exports = function(db, mongoose) {
             }
         });
 
+        return deferred.promise;
+    }
+
+    function findThemeByIds(ids) {
+        var deferred = q.defer();
+        ThemeModel.find({
+            '_id': {$in: ids}
+        }, function (err, themes) {
+            if (err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(themes);
+            }
+        });
+        return deferred.promise;
+    }
+
+    function findFollowedThemesForUser(userId) {
+        var deferred = q.defer();
+
+        UserModel.findById(userId, function (err, user) {
+            if (err) {
+                deferred.reject(err);
+            } else {
+                var themeIds = user.themes_followed;
+                deferred.resolve(findThemeByIds(themeIds));
+            }
+        });
         return deferred.promise;
     }
 

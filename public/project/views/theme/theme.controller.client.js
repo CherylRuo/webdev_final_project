@@ -8,7 +8,7 @@
         .controller("NewThemeController", NewThemeController)
         .controller("EditThemeController", EditThemeController);
 
-    function ThemeListController($routeParams, ThemeService, $location, UserService) {
+    function ThemeListController($routeParams, ThemeService, $location, UserService, $route) {
         var vm = this;
         var userId = parseInt($routeParams.uid);
         var promise = ThemeService.findFollowedUsersByUserId(userId);
@@ -19,8 +19,18 @@
             function (httpError) {
                 vm.error = "Cannot find followed users for this user."
             });
-        var promise1 = ThemeService.findAllThemesForUser(userId);
+
+        var promise1 = ThemeService.findFollowedThemesByUserId(userId);
         promise1.then(
+            function(response){
+                vm.followedThemes = response.data;
+            },
+            function (httpError) {
+                vm.error = "Cannot find followed themes for this user."
+            });
+
+        var promise2 = ThemeService.findAllThemesForUser(userId);
+        promise2.then(
             function(response){
                 vm.themes = response.data;
             },
@@ -68,7 +78,32 @@
                     var promise1 = UserService.updateUser(userId, currentUser);
                     promise1.then(
                         function(response) {
-                            $location.url("/user/"+ userId +"/theme");
+                            $route.reload();
+                        },
+                        function (httpError) {
+                            vm.error = "Error!";
+                        });
+                },
+                function (httpError) {
+                    vm.error = "Error!";
+                });
+        }
+
+        vm.unfollowUser = unfollowUser;
+        function unfollowUser(followUserId) {
+            var promise = UserService.findUserById(userId);
+            promise.then(
+                function (response) {
+                    var currentUser = response.data;
+                    for(var i=currentUser.user_followed.length-1; i>=0; i--) {
+                        if(currentUser.user_followed[i] == followUserId) {
+                            currentUser.user_followed.splice(i, 1);
+                        }
+                    }
+                    var promise1 = UserService.updateUser(userId, currentUser);
+                    promise1.then(
+                        function(response) {
+                            $route.reload();
                         },
                         function (httpError) {
                             vm.error = "Error!";
@@ -89,7 +124,7 @@
                     var promise1 = UserService.updateUser(userId, currentUser);
                     promise1.then(
                         function(response) {
-                            $location.url("/user/"+ userId +"/theme");
+                            $route.reload();
                         },
                         function (httpError) {
                             vm.error = "Error!";
@@ -99,6 +134,32 @@
                     vm.error = "Error!";
                 });
         }
+
+        vm.unfollowTheme = unfollowTheme;
+        function unfollowTheme(followThemeId) {
+            var promise = UserService.findUserById(userId);
+            promise.then(
+                function (response) {
+                    var currentUser = response.data;
+                    for(var i=currentUser.themes_followed.length-1; i>=0; i--) {
+                        if(currentUser.themes_followed[i] == followThemeId) {
+                            currentUser.themes_followed.splice(i, 1);
+                        }
+                    }
+                    var promise1 = UserService.updateUser(userId, currentUser);
+                    promise1.then(
+                        function(response) {
+                            $route.reload();
+                        },
+                        function (httpError) {
+                            vm.error = "Error!";
+                        });
+                },
+                function (httpError) {
+                    vm.error = "Error!";
+                });
+        }
+
         vm.userId = userId;
     }
 

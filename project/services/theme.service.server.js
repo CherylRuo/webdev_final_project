@@ -5,6 +5,7 @@ module.exports = function (app, model) {
 
     app.post('/api/user/:userId/theme', createThemeForUser);
     app.get('/api/user/:userId/theme', findAllThemesForUser);
+    app.get('/api/followedThemes/:userId', findFollowedThemesForUser);
     app.get('/api/theme/:themeId', findThemeById);
     app.get('/api/searchThemes/:themeQuery', searchThemes);
     app.get('/api/searchUsers/:userQuery', searchUsers);
@@ -22,8 +23,16 @@ module.exports = function (app, model) {
     function findAllThemesForUser(req, res) {
         model
             .findAllThemesForUser(req.params.userId)
-            .then(function(theme) {
-                res.json(theme);
+            .then(function(themes) {
+                res.json(themes);
+            });
+    }
+
+    function findFollowedThemesForUser(req, res) {
+        model
+            .findFollowedThemesForUser(req.params.userId)
+            .then(function(followedThemes) {
+                res.json(followedThemes);
             });
     }
 
