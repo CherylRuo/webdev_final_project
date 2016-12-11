@@ -19,8 +19,6 @@
         <span ng-show="model.user.password != model.user.verifypassword" class="help-block">
                Passwords are not match.
         </span>
-        <input ng-model="model.user.userType" name="userType" class="form-control" type="userType"
-               placeholder="userType" required/>
         <button type="submit" class="btn btn-primary btn-block"
                 ng-click="myForm.$valid && model.register(model.user)">Register
         </button>
