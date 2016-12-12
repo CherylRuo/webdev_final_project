@@ -2,13 +2,17 @@
     <div class="container-fluid row">
         <div class="col-xs-1 col-sm-1">
             <div class="navbar-header">
-                <p ng-show="model.user!=undefined" class="navbar-text">
+                <p ng-show="model.user!=undefined&&model.user.userType=='USER'" class="navbar-text">
                     <a href="#/user/{{model.userId}}/theme" class="navbar-link">
                         <span class="glyphicon glyphicon-chevron-left"></span></a>
                 </p>
                 <p ng-show="model.user==undefined" class="navbar-text">
                     <a href="#/guest" class="navbar-link">
                         <span class="glyphicon glyphicon-chevron-left"></span></a>
+                </p>
+                <p ng-show="model.user!=undefined&&model.user.userType=='ADMIN'" class="navbar-text">
+                <a href="#/admin" class="navbar-link">
+                    <span class="glyphicon glyphicon-chevron-left"></span></a>
                 </p>
             </div>
         </div>
@@ -35,7 +39,7 @@
 
 <div class="container">
     <a ng-show="model.user!=undefined" href="#/user/{{model.userId}}/theme/{{model.themeId}}/snatch/search" class="nounderline">
-        Want to see price of snatch? search here
+        Want to find snatch details from Walmart? click here to search
     </a>
     <ul>
         <li ng-repeat="snatch in model.snatches">

@@ -25,5 +25,5 @@ module.exports = function(app) {
 
     var snatchModel = require("./model/snatch/snatch.model.server.js")(mongoose, db);
     require("./services/snatch.service.server.js")(app, snatchModel);
-
+    require("./services/walmart.service.server.js")(app);
 };

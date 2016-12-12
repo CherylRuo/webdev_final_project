@@ -15,7 +15,8 @@
     "mongoose-search-plugin": "^0.1.2",
     "multer": "^1.2.0",
     "passport-facebook": "^2.1.1",
-    "q": "^1.4.1"
+    "q": "^1.4.1",
+    "request": "^2.79.0"
   },
   "devDependencies": {},
   "scripts": {

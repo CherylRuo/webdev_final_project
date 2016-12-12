@@ -174,9 +174,16 @@
         var userId = parseInt($routeParams.uid);
         vm.user = $rootScope.currentUser;
         function searchQuery(query) {
-            var result = WalmartService.searchWalmart(query);
-            vm.products = result.items;
-            console.log(result);
+            var promise = WalmartService.searchWalmart(query);
+            promise.then(
+                function (response) {
+                    var queryResult = response.data;
+                    vm.products = JSON.parse(queryResult).items;
+                    console.log(vm.products);
+                },
+                function (httpError) {
+                    vm.error = "Cannot search snatch from walmart."
+                });
         }
 
         vm.userId = userId;
