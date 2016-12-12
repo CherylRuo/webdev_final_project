@@ -92,6 +92,11 @@
                 controller: "SnatchListController",
                 controllerAs: "model"
             })
+            .when("/user/:uid/theme/:tid/snatch/search", {
+                templateUrl: "views/snatch/snatch-search.view.client.html",
+                controller: "SnatchSearchController",
+                controllerAs: "model"
+            })
             .when("/guest/theme/:tid/snatch", {
                 templateUrl: "views/snatch/snatch-list.view.client.html",
                 controller: "SnatchListController",

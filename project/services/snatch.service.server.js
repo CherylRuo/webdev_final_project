@@ -22,7 +22,7 @@ module.exports = function (app, model) {
         var snatchId = req.body.snatchId;
 
         if(myFile == null) {
-            res.redirect('../project/index.html#/user/'+userId+'/theme/'+themeId+'/snatch/'+snatchId);
+            res.redirect('/project/index.html#/user/'+userId+'/theme/'+themeId+'/snatch/'+snatchId);
             return;
         }
         var width         = req.body.width;
@@ -36,8 +36,7 @@ module.exports = function (app, model) {
             .then(function(snatch) {
                 res.json(snatch);
             });
-
-        res.redirect('../project/index.html#/user/'+userId+'/theme/'+themeId+'/snatch/'+snatchId);
+        res.redirect('/project/index.html#/user/'+userId+'/theme/'+themeId+'/snatch/'+snatchId);
     }
 
     function createSnatch(req, res) {

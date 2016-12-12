@@ -34,13 +34,14 @@
 </nav>
 
 <div class="container">
+    <a ng-show="model.user!=undefined" href="#/user/{{model.userId}}/theme/{{model.themeId}}/snatch/search" class="nounderline">
+        Want to see price of snatch? search here
+    </a>
     <ul>
         <li ng-repeat="snatch in model.snatches">
             <div class="container-fluid row">
                 <div class="col-xs-11">
-                    <a href="#/user/{{model.userId}}/theme/{{model.themeId}}/snatch/{{snatch._id}}" class="nounderline">
-                        <img id="image" ng-src="{{snatch.url}}">
-                    </a>
+                    <img id="image" ng-src="{{snatch.url}}">
                     <p>{{snatch.dateCreated}}</p><br>
                     <p class="noborder" id="des" readonly>{{snatch.description}}</p>
                     <pre class="noborder" name='comments' id='comments'>{{snatch.comment}}</pre>

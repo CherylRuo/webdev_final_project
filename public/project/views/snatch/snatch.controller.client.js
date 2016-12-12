@@ -5,12 +5,13 @@
     angular
         .module("WebAppMaker")
         .controller("SnatchListController", SnatchListController)
-        .controller("EditSnatchController", EditSnatchController);
+        .controller("EditSnatchController", EditSnatchController)
+        .controller("SnatchSearchController", SnatchSearchController);
     function SnatchListController($routeParams, SnatchService, UserService, $location, $rootScope) {
         var vm = this;
         vm.logout = logout;
         vm.createSnatch = createSnatch;
-        vm.addCommentToSnatch = addCommentToSnatch
+        vm.addCommentToSnatch = addCommentToSnatch;
         vm.user = $rootScope.currentUser;
         var themeId = parseInt($routeParams.tid);
         var userId = parseInt($routeParams.uid);
@@ -70,19 +71,30 @@
                     });
         }
 
-
         vm.userId = userId;
         vm.themeId = themeId;
     }
 
-    function EditSnatchController($location, $routeParams, SnatchService, ThemeService) {
+    function EditSnatchController($location, $routeParams, SnatchService, ThemeService, $rootScope, UserService) {
         var vm = this;
         vm.updateSnatch = updateSnatch;
         vm.deleteSnatch = deleteSnatch;
+        var user = $rootScope.currentUser;
+        if (user == undefined) {
+            UserService
+                .findUserById($routeParams.uid)
+                .then(
+                    function (response) {
+                        var user = response.data;
+                        $rootScope.currentUser = user;
+                    },
+                    function (error) {
+                        vm.error = error;
+                    });
+        }
         var snatchId = parseInt($routeParams.sid);
         var userId = parseInt($routeParams.uid);
         var themeId = parseInt($routeParams.tid);
-
         var promise = SnatchService.findSnatchById(snatchId);
         vm.themeTags = "";
         promise.then(
@@ -105,39 +117,39 @@
             });
 
         function updateSnatch(updateSnatch, name) {
-                if(name==undefined) {
-                    var promise1 = SnatchService.updateSnatch(snatchId, updateSnatch);
-                    promise1.then(
-                        function (response1) {
+            if (name == undefined) {
+                var promise1 = SnatchService.updateSnatch(snatchId, updateSnatch);
+                promise1.then(
+                    function (response1) {
 
-                            $location.url("/user/" + userId + "/theme/" + themeId + "/snatch");
-                        },
-                        function (httpError) {
-                            vm.error = "Cannot update snatch."
-                        });
-                }else{
-                    var themeTag = {};
-                    themeTag.name = name;
-                    var promise2 = ThemeService.getCreateIdByName(snatchId, themeTag);
-                    promise2.then(
-                        function (response) {
-                            var id = response.data;
-                            updateSnatch._theme.push(id);
-                            var promise3 = SnatchService.updateSnatch(snatchId, updateSnatch);
-                            promise3.then(
-                                function (response1) {
+                        $location.url("/user/" + userId + "/theme/" + themeId + "/snatch");
+                    },
+                    function (httpError) {
+                        vm.error = "Cannot update snatch."
+                    });
+            } else {
+                var themeTag = {};
+                themeTag.name = name;
+                var promise2 = ThemeService.getCreateIdByName(snatchId, themeTag);
+                promise2.then(
+                    function (response) {
+                        var id = response.data;
+                        updateSnatch._theme.push(id);
+                        var promise3 = SnatchService.updateSnatch(snatchId, updateSnatch);
+                        promise3.then(
+                            function (response1) {
 
-                                    $location.url("/user/" + userId + "/theme/" + themeId + "/snatch");
-                                },
-                                function (httpError) {
-                                    vm.error = "Cannot update snatch."
-                                });
-                        },
-                        function (httpError) {
-                            vm.error = "Cannot update snatch."
-                        });
-                }
+                                $location.url("/user/" + userId + "/theme/" + themeId + "/snatch");
+                            },
+                            function (httpError) {
+                                vm.error = "Cannot update snatch."
+                            });
+                    },
+                    function (httpError) {
+                        vm.error = "Cannot update snatch."
+                    });
             }
+        }
 
         function deleteSnatch() {
             var promise = SnatchService.deleteSnatch(snatchId);
@@ -153,5 +165,21 @@
         vm.snatchId = snatchId;
         vm.themeId = themeId;
         vm.userId = userId;
+    }
+
+    function SnatchSearchController(WalmartService, $routeParams, $rootScope) {
+        var vm = this;
+        vm.searchQuery = searchQuery;
+        var themeId = parseInt($routeParams.tid);
+        var userId = parseInt($routeParams.uid);
+        vm.user = $rootScope.currentUser;
+        function searchQuery(query) {
+            var result = WalmartService.searchWalmart(query);
+            vm.products = result.items;
+            console.log(result);
+        }
+
+        vm.userId = userId;
+        vm.themeId = themeId;
     }
 })();
