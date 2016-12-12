@@ -56,7 +56,7 @@
                     <button ng-show="model.user!=undefined" ng-click="model.addCommentToSnatch(snatch)" type="button">Submit</button>
                 </div>
                 <div class="col-xs-1">
-                    <a ng-show="model.user!=undefined" href="#/user/{{model.userId}}/theme/{{model.themeId}}/snatch/{{snatch._id}}" class="nounderline">
+                    <a ng-show="model.user!=undefined&&model.user._id==model.theme._user" href="#/user/{{model.userId}}/theme/{{model.themeId}}/snatch/{{snatch._id}}" class="nounderline">
                         <span class="glyphicon glyphicon-edit"></span>
                     </a>
                 </div>
