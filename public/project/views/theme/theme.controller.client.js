@@ -16,7 +16,8 @@
         vm.followUser = followUser;
         vm.unfollowUser = unfollowUser;
         vm.followTheme = followTheme;
-
+        var user = $rootScope.user;
+        vm.user = user;
         var userId = parseInt($routeParams.uid);
         var promise = ThemeService.findFollowedUsersByUserId(userId);
         promise.then(

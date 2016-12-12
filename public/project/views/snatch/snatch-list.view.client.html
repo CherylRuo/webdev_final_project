@@ -2,7 +2,7 @@
     <div class="container-fluid row">
         <div class="col-xs-1 col-sm-1">
             <div class="navbar-header">
-                <p ng-show="model.user!=undefined&&model.user.userType=='USER'" class="navbar-text">
+                <p ng-show="model.user!=undefined&&model.user.userType!='ADMIN'" class="navbar-text">
                     <a href="#/user/{{model.userId}}/theme" class="navbar-link">
                         <span class="glyphicon glyphicon-chevron-left"></span></a>
                 </p>
@@ -27,7 +27,7 @@
 
         <div class="col-sm-1 col-xs-1">
             <div class="navbar-header">
-                <p ng-show="model.user!=undefined" id="plus" class="navbar-text">
+                <p ng-show="model.user!=undefined&&model.user._id==userId" id="plus" class="navbar-text">
                     <a ng-click="model.createSnatch(model.snatch)" class="navbar-link">
                         <span class="glyphicon glyphicon-plus"></span>
                     </a>

@@ -19,7 +19,7 @@
         </div>
 
         <div class="col-sm-1 col-xs-1">
-            <div class="navbar-header">
+            <div ng-show="model.user._id==model.userId" class="navbar-header">
                 <p id="plus" class="navbar-text">
                     <a href="#/user/{{model.userId}}/theme/new" class="navbar-link">
                         <span class="glyphicon glyphicon-plus"></span>
