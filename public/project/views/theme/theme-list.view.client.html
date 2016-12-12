@@ -57,7 +57,7 @@
                        class="text-left nounderline">{{theme.name}}</a>
                 </div>
                 <div class="col-xs-4">
-                    <a href="#/user/{{model.userId}}/theme/{{theme._id}}" class="nounderline">
+                    <a ng-show="model.user._id==model.userId" href="#/user/{{model.userId}}/theme/{{theme._id}}" class="nounderline">
                         <span class="glyphicon glyphicon-cog"></span></a>
                 </div>
             </div>
@@ -71,7 +71,7 @@
                        class="nounderline followed">{{theme.name}}
                     </a>
                 </div>
-                <div class="col-xs-4">
+                <div ng-show="model.user._id==model.userId" class="col-xs-4">
                     <button ng-click="model.unfollowTheme(theme._id)" type="button" class="btn btn-default btn-xs">
                         <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span> Unfollow
                     </button>
@@ -92,7 +92,7 @@
                 <a href="#/user/{{user._id}}/theme"
                    class="nounderline followed">{{user.username}}
                 </a>
-                <button ng-click="model.unfollowUser(user._id)" type="button" class="btn btn-default btn-xs">
+                <button ng-show="model.user._id==model.userId" ng-click="model.unfollowUser(user._id)" type="button" class="btn btn-default btn-xs">
                     <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span> Unfollow
                 </button>
             </div>
@@ -105,13 +105,13 @@
 
 <!--search area-->
 <div class="hidden-xs col-sm-4">
-    <form class="form-wrapper">
+    <form ng-show="model.user._id==model.userId" class="form-wrapper">
         <select ng-model="model.selectedName" ng-options="x for x in model.keywords">
         </select>
         <input ng-model="model.query" type="text" id="searchthemes" placeholder="Search by keyword..." required>
         <input ng-click="model.searchQuery(model.query)" type="submit" value="search" id="submitthemes">
     </form>
-    <ul>
+    <ul ng-show="model.user._id==model.userId">
         <li ng-repeat="user in model.userSearchResult">
             <div class="container-fluid row">
                 <a href="#/user/{{user._id}}/theme"
@@ -122,7 +122,7 @@
             </div>
         </li>
     </ul>
-    <ul>
+    <ul ng-show="model.user._id==model.userId">
         <li ng-repeat="theme in model.themeSearchResult">
             <div class="container-fluid row">
                 <a href="#/user/{{model.userId}}/theme/{{theme._id}}/snatch"
