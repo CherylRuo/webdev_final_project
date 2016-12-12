@@ -9,7 +9,7 @@
             </div>
         </div>
 
-        <div class="col-xs-10">
+        <div class="col-xs-11">
             <div class="navbar-header">
                 <a id="head" class="navbar-brand">
                     Guest
@@ -20,19 +20,21 @@
 </nav>
 
 <!--search area-->
-<div class="col-sm-6 text-center">
-    <form class="form-wrapper">
-        <input ng-model="model.query" type="text" id="searchthemes" placeholder="Search themes..." required>
-        <input ng-click="model.searchQuery(model.query)" type="submit" value="search" id="submitthemes">
-    </form>
-    <ul>
-        <li ng-repeat="theme in model.themelist">
-            <div class="container-fluid row">
-                <a href="#/guest/theme/{{theme._id}}/snatch"
-                   class="nounderline followed">{{theme.name}}</a>
-            </div>
-        </li>
-    </ul>
+<div class="container">
+    <div class="col-sm-12 text-center">
+        <form class="form-wrapper">
+            <input ng-model="model.query" type="text" id="searchthemes" placeholder="Search themes..." required>
+            <input ng-click="model.searchQuery(model.query)" type="submit" value="search" id="submitthemes">
+        </form>
+        <ul>
+            <li ng-repeat="theme in model.themelist">
+                <div class="container-fluid row">
+                    <a href="#/guest/theme/{{theme._id}}/snatch"
+                       class="nounderline followed">{{theme.name}}</a>
+                </div>
+            </li>
+        </ul>
+    </div>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">

@@ -1,18 +1,20 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid row">
-        <div class="col-xs-11">
+        <div class="col-xs-4">
             <div class="navbar-header">
                 <a class="navbar-brand" href="/home.html">
                     Home
                 </a>
             </div>
+        </div>
+        <div class="col-xs-7">
             <span ng-show="model.user.userType=='ADMIN'">
                 <a class="navbar-brand" href="#/admin">
                     Admin
                 </a>
             </span>
         </div>
-        <div class="col-xs-1 col-sm-1">
+        <div class="col-xs-1">
             <div class="navbar-header">
                 <p class="navbar-text">
                     <a ng-click="model.updateUser(model.user)" class="navbar-link">
@@ -64,7 +66,7 @@
     <a class="btn btn-primary btn-block"
        href="#/user/{{model.user._id}}/theme">Themes</a>
     <a class="btn btn-danger btn-block" ng-click=model.logout()>Logout</a>
-    <a class="btn btn-danger btn-block" ng-click="model.unregister()" >Unregister</a>
+    <a class="btn btn-danger btn-block" ng-click="model.unregister()">Unregister</a>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">

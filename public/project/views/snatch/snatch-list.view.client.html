@@ -44,8 +44,10 @@
     <ul>
         <li ng-repeat="snatch in model.snatches">
             <div class="container-fluid row">
-                <div class="col-xs-11">
+                <div class="col-xs-11 col-sm-4">
                     <img id="image" ng-src="{{snatch.url}}">
+                </div>
+                <div class="hidden-xs col-sm-6">
                     <p>{{snatch.dateCreated}}</p><br>
                     <p class="noborder" id="des" readonly>{{snatch.description}}</p>
                     <pre class="noborder" name='comments' id='comments'>{{snatch.comment}}</pre>
