@@ -7,7 +7,7 @@
         .controller("SnatchListController", SnatchListController)
         .controller("EditSnatchController", EditSnatchController)
         .controller("SnatchSearchController", SnatchSearchController);
-    function SnatchListController($routeParams, SnatchService, UserService, $location, $rootScope) {
+    function SnatchListController($routeParams, SnatchService, ThemeService, UserService, $location, $rootScope) {
         var vm = this;
         vm.logout = logout;
         vm.createSnatch = createSnatch;
@@ -22,6 +22,14 @@
             },
             function (httpError) {
                 vm.error = "Cannot find snatch for this theme."
+            });
+        var promise1 = ThemeService.findThemeById(themeId);
+        promise1.then(
+            function (response) {
+                vm.theme = response.data;
+            },
+            function (httpError) {
+                vm.error = "Cannot find theme for current themeId."
             });
 
         function createSnatch(snatch) {

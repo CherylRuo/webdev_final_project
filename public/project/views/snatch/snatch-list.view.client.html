@@ -27,7 +27,7 @@
 
         <div class="col-sm-1 col-xs-1">
             <div class="navbar-header">
-                <p ng-show="model.user!=undefined&&model.user._id==userId" id="plus" class="navbar-text">
+                <p ng-show="model.user!=undefined&&model.user._id==model.theme._user" id="plus" class="navbar-text">
                     <a ng-click="model.createSnatch(model.snatch)" class="navbar-link">
                         <span class="glyphicon glyphicon-plus"></span>
                     </a>
