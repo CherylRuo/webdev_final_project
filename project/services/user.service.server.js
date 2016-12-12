@@ -3,19 +3,8 @@
  */
 module.exports = function (app, model) {
     var passport = require('passport');
-    var FacebookStrategy = require('passport-facebook').Strategy;
     var bcrypt = require("bcrypt-nodejs");
     var LocalStrategy = require('passport-local').Strategy;
-    var facebookConfig = {
-        clientID: 1018543724921975,
-        clientSecret: 'ee9c588d03a79ee3349731f926e63cd9',
-        callbackURL: 'http://localhost:3000/assignment/index.html',
-        // clientID: process.env.FACEBOOK_CLIENT_ID,
-        // clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-        // callbackURL: process.env.FACEBOOK_CALLBACK_URL,
-        // profileFields: ['id', 'name', 'email']
-    };
-    passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
     passport.use(new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
@@ -28,12 +17,6 @@ module.exports = function (app, model) {
     app.get('/api/user/:userId', findUserById);
     app.get('/api/isAdmin', checkIsAdmin);
     app.get('/api/loggedin', loggedin);
-    app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
-    app.get('/auth/facebook/callback',
-        passport.authenticate('facebook', {
-            successRedirect: '/assignment/#/user',
-            failureRedirect: '/assignment/#/login'
-        }));
     app.get("/api/followedUsers/:userId", findFollowedUsersByUserId);
     app.get("/api/userlist", findAllUsers);
     app.put('/api/user/:userId', updateUser);
@@ -178,35 +161,6 @@ module.exports = function (app, model) {
             .then(function (users) {
                 res.json(users);
             });
-    }
-
-    function facebookStrategy(token, profile, done) {
-        model
-            .findUserByFacebookId(profile.id)
-            .then(
-                function (facebookUser) {
-                    if (facebookUser) {
-                        return done(null, facebookUser);
-                    } else {
-                        facebookUser = {
-                            username: profile.name.givenName.concat(profile.name.familyName).toLowerCase(),
-                            firstName: profile.name.givenName,
-                            lastName: profile.name.familyName,
-                            email: profile.emails[0].value,
-                            facebook: {
-                                token: token,
-                                id: profile.id
-                            }
-                        };
-                        model
-                            .createUser(facebookUser)
-                            .then(
-                                function (facebookUser) {
-                                    return done(null, facebookUser);
-                                }
-                            );
-                    }
-                });
     }
 
     function serializeUser(user, done) {

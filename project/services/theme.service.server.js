@@ -9,9 +9,10 @@ module.exports = function (app, model) {
     app.get('/api/theme/:themeId', findThemeById);
     app.get('/api/searchThemes/:themeQuery', searchThemes);
     app.get('/api/searchUsers/:userQuery', searchUsers);
-    app.get("/api/themelist", findAllThemes);
+    app.get("/api/themeList", findAllThemes);
     app.put('/api/theme/:themeId', updateTheme);
     app.delete('/api/theme/:themeId', deleteTheme);
+    app.post('/api/theme/addHashTag/:snatchId',getCreateIdByName);
 
     function createThemeForUser(req, res) {
         model
@@ -82,6 +83,14 @@ module.exports = function (app, model) {
             .deleteTheme(req.params.themeId)
             .then(function(status){
                 res.json(status);
+            });
+    }
+
+    function getCreateIdByName(req, res){
+        model
+            .getCreateIdByName(req.user._id, req.params.snatchId, req.body)
+            .then(function(themeId) {
+                res.json(themeId);
             });
     }
 };

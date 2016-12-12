@@ -20,7 +20,6 @@ module.exports = function(db, mongoose) {
         var deferred = q.defer();
         console.log("Create a snatch.");
         snatch._theme = themeId;
-
         SnatchModel.create(snatch, function(err, snatch) {
             ThemeModel.findById(themeId, function (err, theme) {
                 theme.snatches.push(snatch._id);

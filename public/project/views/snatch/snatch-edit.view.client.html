@@ -21,7 +21,7 @@
         <div class="col-sm-1 col-xs-1">
             <div class="navbar-header">
                 <p id="ok" class="navbar-text">
-                    <a ng-click="model.updateSnatch(model.snatch)" class="navbar-link">
+                    <a ng-click="model.updateSnatch(model.snatch,model.themeTag)" class="navbar-link">
                         <span class="glyphicon glyphicon-ok"></span>
                     </a>
                 </p>
@@ -44,10 +44,18 @@
                   ng-show="(myForm.description.$invalid && !myForm.description.$pristine)">
                   Please input image description.
             </span>
-            <label for="themes">Themes</label>
-            <textarea ng-model="model.themeName" rows="2" name="themes" type="text" class="form-control"
-                      id="themes" placeholder="themes" required>
+            <label for="url">Image URL</label>
+            <input ng-model="model.snatch.url" name="url" type="text" class="form-control"
+                      id="url" placeholder="image url" required>
+            </input>
+            <label for="themes">Theme Tags</label>
+            <textarea ng-model="model.themeTags" rows="2" name="themes" type="text" class="form-control"
+                      id="themes" placeholder="themes" required readonly>
             </textarea>
+            <label for="url">Add One Theme Tag below</label>
+            <input ng-model="model.themeTag" name="themeTag" type="text" class="form-control"
+                   id="themeTag" placeholder="Theme Tag" required>
+            </input>
             <label>Created Time</label>
             <text>{{model.snatch.dateCreated}}</text><br>
             <span class="help-block"

@@ -9,7 +9,6 @@ module.exports = function (db, mongoose) {
         createUser: createUser,
         findUserById: findUserById,
         findUserByIds: findUserByIds,
-        findUserByFacebookId: findUserByFacebookId,
         findUserByUsername: findUserByUsername,
         findUserByCredentials: findUserByCredentials,
         findAllUsers: findAllUsers,
@@ -58,10 +57,6 @@ module.exports = function (db, mongoose) {
             }
         });
         return deferred.promise;
-    }
-
-    function findUserByFacebookId(facebookId) {
-        return UserModel.findOne({'facebook.id': facebookId});
     }
 
     function findUserByCredentials(username, password) {

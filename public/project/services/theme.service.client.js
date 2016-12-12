@@ -16,7 +16,8 @@
             searchThemes : searchThemes,
             searchUsers : searchUsers,
             updateTheme : updateTheme,
-            deleteTheme : deleteTheme
+            deleteTheme : deleteTheme,
+            getCreateIdByName : getCreateIdByName
         };
         return api;
 
@@ -47,7 +48,7 @@
 
         function findAllThemes() {
             return $http
-                .get("/api/themelist")
+                .get("/api/themeList")
         }
 
         function searchThemes(themeQuery) {
@@ -68,6 +69,10 @@
         function deleteTheme(themeId) {
             return $http
                 .delete("/api/theme/" + themeId)
+        }
+
+        function getCreateIdByName(snatchId, name) {
+            return $http.post("/api/theme/addHashTag/"+snatchId, name)
         }
     }
 })();

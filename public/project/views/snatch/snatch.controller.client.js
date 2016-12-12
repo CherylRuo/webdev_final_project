@@ -24,6 +24,10 @@
             });
 
         function createSnatch(snatch) {
+            if (snatch == undefined) {
+                snatch = {};
+            }
+            snatch._user = vm.user._id;
             var promise = SnatchService.createSnatch(vm.themeId, snatch);
             promise.then(
                 function (response) {
@@ -39,7 +43,7 @@
             promise.then(
                 function (response) {
                     var username = response.data.username;
-                    if(snatch.comment == undefined) {
+                    if (snatch.comment == undefined) {
                         snatch.comment = username + ": " + vm.textModel;
                     } else {
                         snatch.comment += "\n" + username + ": " + vm.textModel;
@@ -55,6 +59,7 @@
                 }
             )
         }
+
         function logout() {
             UserService
                 .logout()
@@ -79,17 +84,16 @@
         var themeId = parseInt($routeParams.tid);
 
         var promise = SnatchService.findSnatchById(snatchId);
-        var themeName = "";
+        vm.themeTags = "";
         promise.then(
             function (response) {
                 vm.snatch = response.data;
                 var themeIds = vm.snatch._theme;
-                for(var i=0; i<themeIds.length; i++) {
+                for (var i = 0; i < themeIds.length; i++) {
                     var promise1 = ThemeService.findThemeById(themeIds[i]);
                     promise1.then(
                         function (response1) {
-                            themeName += "#" + response1.data.name + " ";
-                            vm.themeName = themeName;
+                            vm.themeTags += "#" + response1.data.name;
                         },
                         function (httpError) {
                             vm.error = "Cannot find snatch."
@@ -100,16 +104,40 @@
                 vm.error = "Cannot find snatch."
             });
 
-        function updateSnatch(updateSnatch) {
-            var promise = SnatchService.updateSnatch(snatchId, updateSnatch);
-            promise.then(
-                function (response) {
-                    $location.url("/user/" + userId + "/theme/" + themeId + "/snatch");
-                },
-                function (httpError) {
-                    vm.error = "Cannot update snatch."
-                });
-        }
+        function updateSnatch(updateSnatch, name) {
+                if(name==undefined) {
+                    var promise1 = SnatchService.updateSnatch(snatchId, updateSnatch);
+                    promise1.then(
+                        function (response1) {
+
+                            $location.url("/user/" + userId + "/theme/" + themeId + "/snatch");
+                        },
+                        function (httpError) {
+                            vm.error = "Cannot update snatch."
+                        });
+                }else{
+                    var themeTag = {};
+                    themeTag.name = name;
+                    var promise2 = ThemeService.getCreateIdByName(snatchId, themeTag);
+                    promise2.then(
+                        function (response) {
+                            var id = response.data;
+                            updateSnatch._theme.push(id);
+                            var promise3 = SnatchService.updateSnatch(snatchId, updateSnatch);
+                            promise3.then(
+                                function (response1) {
+
+                                    $location.url("/user/" + userId + "/theme/" + themeId + "/snatch");
+                                },
+                                function (httpError) {
+                                    vm.error = "Cannot update snatch."
+                                });
+                        },
+                        function (httpError) {
+                            vm.error = "Cannot update snatch."
+                        });
+                }
+            }
 
         function deleteSnatch() {
             var promise = SnatchService.deleteSnatch(snatchId);
@@ -121,6 +149,7 @@
                     vm.error = "Cannot delete snatch."
                 });
         }
+
         vm.snatchId = snatchId;
         vm.themeId = themeId;
         vm.userId = userId;
