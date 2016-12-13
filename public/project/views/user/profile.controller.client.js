@@ -47,7 +47,7 @@
 
         function unregister() {
             UserService
-                .deleteUser(vm.userId)
+                .unregisterUser(vm.userId)
                 .then(
                     function (response) {
                         // Take the user to login page on successful deletion
