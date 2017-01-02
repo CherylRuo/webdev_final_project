@@ -2,6 +2,11 @@ input.form-control {
     margin-bottom: 5px;
 }
 
+.navbar-default {
+    background-color: gray;
+    border-color: gray;
+}
+
 .snatch {
     font-family: Verdana;
     padding-top: 60px;
