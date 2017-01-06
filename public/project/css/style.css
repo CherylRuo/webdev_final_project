@@ -69,8 +69,8 @@ li {
 }
 
 .copyright {
-    position: relative;
-    bottom: 0;
+    position: fixed;
+    bottom: 50px;
 }
 
 .followed {
