@@ -122,3 +122,26 @@ li {
     color: #dd2c00;
     margin-left: 15px;
 }
+#googlesearch {
+    padding-top: 10px
+}
+
+div.show-image
+{
+    position: relative;
+    float:left;
+    margin:5px;
+}
+
+div.show-image:hover input
+{
+    display: block;
+}
+
+div.show-image input
+{
+    position:absolute;
+    top:0;
+    left:0;
+    display:none;
+}

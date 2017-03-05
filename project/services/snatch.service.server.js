@@ -40,6 +40,8 @@ module.exports = function (app, model) {
     }
 
     function createSnatch(req, res) {
+        console.log(req.params.themeId);
+        console.log(req.body);
         model
             .createSnatch(req.params.themeId, req.body)
             .then(function(snatch) {

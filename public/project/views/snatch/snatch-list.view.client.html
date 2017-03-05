@@ -11,8 +11,8 @@
                         <span class="glyphicon glyphicon-chevron-left"></span></a>
                 </p>
                 <p ng-show="model.user!=undefined&&model.user.userType=='ADMIN'" class="navbar-text">
-                <a href="#/admin" class="navbar-link">
-                    <span class="glyphicon glyphicon-chevron-left"></span></a>
+                    <a href="#/admin" class="navbar-link">
+                        <span class="glyphicon glyphicon-chevron-left"></span></a>
                 </p>
             </div>
         </div>
@@ -38,52 +38,78 @@
 </nav>
 
 <div class="container">
-    <a ng-show="model.user!=undefined" href="#/user/{{model.userId}}/theme/{{model.themeId}}/snatch/search" class="nounderline">
+    <div><a ng-show="model.user!=undefined" href="#/user/{{model.userId}}/theme/{{model.themeId}}/snatch/search"
+            class="nounderline">
         Want to find similar items in Walmart? click here to search.
     </a>
-    <ul>
-        <li ng-repeat="snatch in model.snatches">
-            <div class="container-fluid row">
-                <div class="col-xs-11 col-sm-4">
-                    <img id="image" ng-src="{{snatch.url}}">
-                </div>
-                <div class="hidden-xs col-sm-6">
-                    <p>{{snatch.dateCreated}}</p><br>
-                    <p class="noborder" id="des" readonly>{{snatch.description}}</p>
-                    <pre class="noborder" name='comments' id='comments'>{{snatch.comment}}</pre>
-                    <textarea ng-show="model.user!=undefined" ng-model="model.textModel" name='newcomment' id='newcomment'
-                              placeholder="Add a comment..."></textarea>
-                    <button ng-show="model.user!=undefined" ng-click="model.addCommentToSnatch(snatch)" type="button">Submit</button>
-                </div>
-                <div class="col-xs-1">
-                    <a ng-show="model.user!=undefined&&model.user._id==model.theme._user" href="#/user/{{model.userId}}/theme/{{model.themeId}}/snatch/{{snatch._id}}" class="nounderline">
-                        <span class="glyphicon glyphicon-edit"></span>
-                    </a>
-                    <a ng-show="model.user!=undefined&&model.user.userType=='ADMIN'" href="#/user/{{model.userId}}/theme/{{model.themeId}}/snatch/{{snatch._id}}" class="nounderline">
-                        <span class="glyphicon glyphicon-edit"></span>
-                    </a>
-                </div>
-            </div>
-        </li>
-    </ul>
-    <div class="col-lg-12 copyright text-center">
-        <p>©Copyright 2017. Snatch. Cheryl Jia</p>
-    </div>
-</div>
+        <div>
+            <div><a href="https://www.pinterest.com/" class="nounderline">
+                Want to find similar themes in Pinterest? click here to search.
+            </a></div>
 
-<nav class="navbar navbar-default navbar-fixed-bottom">
-    <div ng-show="model.user!=undefined" id="user" class="container-fluid">
-        <div class="row navbar-text">
-            <div class="col-xs-3 text-center">
-                <a href="#/user/{{model.userId}}" class="navbar-link">
-                    <span class="glyphicon glyphicon-user"></span>
-                </a>
+            <div id="googlesearch">
+                <p>Search in Google?</p>
+                <form method="get"
+                      action="https://www.google.com/images">
+                    <input type="text" name="q" size="31" value="">
+                </form>
             </div>
-            <div class="col-xs-3 text-center">
-                <a ng-click=model.logout() class="navbar-link">
-                    <span class="glyphicon glyphicon-log-out"></span>
-                </a>
+            <ul>
+                <li ng-repeat="snatch in model.snatches">
+                    <div class="container-fluid row">
+                        <div class="col-xs-11 col-sm-4 show-image">
+                            <img id="image" ng-src="{{snatch.url}}">
+                            <input name="snatchId" value="{{snatch._id}}" style="display: none"/>
+                            <input name="themeId" value="{{snatch._theme}}" style="display: none"/>
+
+                            <input ng-show="model.user!=undefined&&model.user._id==model.theme._user"
+                                   class="the-buttons" type="button" value=" Save"
+                                   ng-click="model.createSnatch(snatch)"/>
+                        </div>
+                        <div class="hidden-xs col-sm-6">
+                            <p>{{snatch.dateCreated}}</p><br>
+                            <p class="noborder" id="des" readonly>{{snatch.description}}</p>
+                            <pre class="noborder" name='comments' id='comments'>{{snatch.comment}}</pre>
+                            <textarea ng-show="model.user!=undefined" ng-model="model.textModel" name='newcomment'
+                                      id='newcomment'
+                                      placeholder="Add a comment..."></textarea>
+                            <button ng-show="model.user!=undefined" ng-click="model.addCommentToSnatch(snatch)"
+                                    type="button">Submit
+                            </button>
+                        </div>
+                        <div class="col-xs-1">
+                            <a ng-show="model.user!=undefined&&model.user._id==model.theme._user"
+                               href="#/user/{{model.userId}}/theme/{{model.themeId}}/snatch/{{snatch._id}}"
+                               class="nounderline">
+                                <span class="glyphicon glyphicon-edit"></span>
+                            </a>
+                            <a ng-show="model.user!=undefined&&model.user.userType=='ADMIN'"
+                               href="#/user/{{model.userId}}/theme/{{model.themeId}}/snatch/{{snatch._id}}"
+                               class="nounderline">
+                                <span class="glyphicon glyphicon-edit"></span>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="col-lg-12 copyright text-center">
+                <p>©Copyright 2017. Snatch. Cheryl Jia</p>
             </div>
         </div>
-    </div>
-</nav>
+
+        <nav class="navbar navbar-default navbar-fixed-bottom">
+            <div ng-show="model.user!=undefined" id="user" class="container-fluid">
+                <div class="row navbar-text">
+                    <div class="col-xs-3 text-center">
+                        <a href="#/user/{{model.userId}}" class="navbar-link">
+                            <span class="glyphicon glyphicon-user"></span>
+                        </a>
+                    </div>
+                    <div class="col-xs-3 text-center">
+                        <a ng-click=model.logout() class="navbar-link">
+                            <span class="glyphicon glyphicon-log-out"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
